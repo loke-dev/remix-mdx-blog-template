@@ -1,7 +1,7 @@
 # Remix MDX Blog Template
 
 <div align="center">
-  <img src="https://repository-images.githubusercontent.com/770896790/81bd6881-7c5b-4a9e-894a-5a7a9c9e0840" alt="Remix MDX Blog Template" width="600" />
+  <img src="https://github.com/user-attachments/assets/ba7c5cd1-1611-439c-811a-e1d33f9d046c" alt="Remix MDX Blog Template" width="600" />
 
   <p>
     <strong>A powerful, modern blog template built with Remix, Vite, and Tailwind.</strong><br />
