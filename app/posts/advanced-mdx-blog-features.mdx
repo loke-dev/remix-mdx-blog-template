@@ -1,0 +1,345 @@
+---
+title: Advanced MDX Blog Features You Should Implement Today
+date: 2024-01-18T08:00:00.000Z
+description: Discover powerful MDX blog features including custom components, table of contents generation, advanced syntax highlighting, and image optimization techniques.
+published: true
+tag: mdx
+---
+
+# Taking Your MDX Blog to the Next Level
+
+Building a basic MDX blog is fairly straightforward, but implementing advanced features can significantly enhance the reading experience and set your blog apart. Let's explore some powerful features you should consider adding to your MDX-powered blog.
+
+## Automatic Table of Contents
+
+A table of contents makes longer posts more navigable. Here's how to implement an automatic TOC component that extracts headings from your MDX content:
+
+```tsx
+import { useEffect, useState } from 'react'
+
+export function TableOfContents({ headings }) {
+  const [activeId, setActiveId] = useState('')
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: '0px 0px -80% 0px' }
+    )
+
+    const elements = headings.map((h) => document.getElementById(h.id))
+    elements.forEach((el) => el && observer.observe(el))
+
+    return () => elements.forEach((el) => el && observer.unobserve(el))
+  }, [headings])
+
+  return (
+    <nav className="toc">
+      <h2 className="text-lg font-semibold mb-3">Table of Contents</h2>
+      <ul className="space-y-2 text-sm">
+        {headings.map((heading) => (
+          <li
+            key={heading.id}
+            className={`${
+              activeId === heading.id
+                ? 'text-blue-600 font-medium'
+                : 'text-gray-600'
+            } hover:text-blue-800 transition-colors ml-${(heading.level - 2) * 4}`}
+          >
+            <a href={`#${heading.id}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+```
+
+This component not only displays the TOC but also highlights the currently visible section as the user scrolls through the article.
+
+## Advanced Code Syntax Highlighting
+
+Enhance code blocks with line highlighting, line numbers, and copy buttons:
+
+```tsx
+import { useEffect, useState } from 'react'
+import Prism from 'prismjs'
+
+export function CodeBlock({ children, className, metastring }) {
+  const [copied, setCopied] = useState(false)
+  const language = className?.replace(/language-/, '') || 'text'
+
+  // Parse metastring for line highlighting
+  const highlightLines =
+    metastring
+      ?.match(/{([\d,-]+)}/)?.[1]
+      .split(',')
+      .flatMap((range) => {
+        if (range.includes('-')) {
+          const [start, end] = range.split('-').map(Number)
+          return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+        }
+        return [Number(range)]
+      }) || []
+
+  useEffect(() => {
+    Prism.highlightAll()
+  }, [children])
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(children)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="relative group">
+      <button
+        onClick={handleCopy}
+        className="absolute right-2 top-2 text-sm px-2 py-1 bg-gray-700 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+      >
+        {copied ? 'Copied!' : 'Copy'}
+      </button>
+      <pre className={`${className} relative`}>
+        {children.split('\n').map((line, i) => (
+          <div
+            key={i}
+            className={`${
+              highlightLines.includes(i + 1)
+                ? 'bg-yellow-100 dark:bg-yellow-900/30'
+                : ''
+            } px-4`}
+          >
+            <span className="inline-block w-8 text-gray-400 text-right mr-4">
+              {i + 1}
+            </span>
+            <code>{line}</code>
+          </div>
+        ))}
+      </pre>
+    </div>
+  )
+}
+```
+
+## Image Optimization and Galleries
+
+Optimize images and create beautiful galleries:
+
+```tsx
+import { useState } from 'react'
+import Image from 'next/image'
+
+export function OptimizedImage({ src, alt, width, height, sizes }) {
+  return (
+    <div className="my-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes={sizes || '(max-width: 768px) 100vw, 768px'}
+        className="rounded-lg"
+        loading="lazy"
+      />
+      {alt && <p className="text-sm text-center text-gray-500 mt-2">{alt}</p>}
+    </div>
+  )
+}
+
+export function ImageCompare({ before, after }) {
+  const [position, setPosition] = useState(50)
+
+  return (
+    <div
+      className="relative h-[400px] my-8 overflow-hidden rounded-lg border"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const pct = (x / rect.width) * 100
+        setPosition(pct)
+      }}
+    >
+      <div className="absolute inset-0">
+        <Image src={after} alt="After" fill className="object-cover" />
+      </div>
+      <div className="absolute inset-0" style={{ width: `${position}%` }}>
+        <Image src={before} alt="Before" fill className="object-cover" />
+      </div>
+      <div
+        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
+        style={{ left: `${position}%` }}
+      />
+    </div>
+  )
+}
+```
+
+## Creating Interactive Diagrams
+
+Embed interactive diagrams in your technical posts:
+
+```tsx
+import { useEffect, useRef } from 'react'
+import mermaid from 'mermaid'
+
+export function Mermaid({ chart }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral' })
+      mermaid.run()
+    }
+  }, [])
+
+  return (
+    <div className="my-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-auto">
+      <div className="mermaid" ref={ref}>
+        {chart}
+      </div>
+    </div>
+  )
+}
+```
+
+Usage in MDX:
+
+```mdx
+<Mermaid
+  chart={`
+graph TD
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+`}
+/>
+```
+
+## Custom Callout Components
+
+Create eye-catching callouts for important information:
+
+```tsx
+export function Callout({ children, type = 'info' }) {
+  const styles = {
+    info: 'bg-blue-50 border-blue-500 text-blue-800 dark:bg-blue-900/30 dark:border-blue-700 dark:text-blue-300',
+    warning:
+      'bg-yellow-50 border-yellow-500 text-yellow-800 dark:bg-yellow-900/30 dark:border-yellow-700 dark:text-yellow-300',
+    error:
+      'bg-red-50 border-red-500 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300',
+    success:
+      'bg-green-50 border-green-500 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300',
+  }
+
+  const icons = {
+    info: '📌',
+    warning: '⚠️',
+    error: '❌',
+    success: '✅',
+  }
+
+  return (
+    <div className={`my-6 p-4 border-l-4 rounded-r-lg ${styles[type]}`}>
+      <div className="flex">
+        <div className="flex-shrink-0 mr-2">{icons[type]}</div>
+        <div>{children}</div>
+      </div>
+    </div>
+  )
+}
+```
+
+Usage in MDX:
+
+```mdx
+<Callout type="warning">
+  Be careful when implementing this feature as it may have unintended side
+  effects.
+</Callout>
+```
+
+## Progressive Loading and Reading Progress
+
+Enhance the reading experience with a progress indicator:
+
+```tsx
+export function ReadingProgress() {
+  const [completion, setCompletion] = useState(0)
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const currentPosition = window.scrollY
+      const documentHeight = document.body.scrollHeight - window.innerHeight
+      const scrollPercent = (currentPosition / documentHeight) * 100
+      setCompletion(scrollPercent)
+    }
+
+    window.addEventListener('scroll', updateProgress)
+    return () => window.removeEventListener('scroll', updateProgress)
+  }, [])
+
+  return (
+    <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+      <div
+        className="h-full bg-blue-600 transition-all duration-150 ease-out"
+        style={{ width: `${completion}%` }}
+      />
+    </div>
+  )
+}
+```
+
+## Implementing these Features
+
+To add these components to your MDX blog, you'll need to make them available through your MDX provider:
+
+```tsx
+import { MDXProvider } from '@mdx-js/react'
+import {
+  Callout,
+  CodeBlock,
+  ImageCompare,
+  Mermaid,
+  OptimizedImage,
+  ReadingProgress,
+  TableOfContents,
+} from './components'
+
+const components = {
+  code: CodeBlock,
+  img: OptimizedImage,
+  TableOfContents,
+  ImageCompare,
+  Mermaid,
+  Callout,
+  ReadingProgress,
+}
+
+export function MDXLayout({ children, frontmatter }) {
+  const headings = extractHeadings(children)
+
+  return (
+    <MDXProvider components={components}>
+      <ReadingProgress />
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+        <article className="lg:col-span-3">
+          <h1>{frontmatter.title}</h1>
+          {children}
+        </article>
+        <aside className="lg:col-span-1 sticky top-20 self-start">
+          <TableOfContents headings={headings} />
+        </aside>
+      </div>
+    </MDXProvider>
+  )
+}
+```
+
+By implementing these advanced features, you'll create a blog that's not only informative but also engaging and easy to navigate.

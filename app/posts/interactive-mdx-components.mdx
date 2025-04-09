@@ -1,0 +1,191 @@
+---
+title: Building Interactive MDX Components for Your Blog
+date: 2023-11-10T14:45:00.000Z
+description: Learn how to create engaging, interactive components that enhance your MDX blog posts and provide a better experience for your readers.
+published: true
+tag: react
+---
+
+# Taking Your Blog Beyond Static Content
+
+One of the most powerful features of MDX is the ability to include interactive React components directly in your markdown content. This allows you to create rich, engaging experiences that wouldn't be possible with traditional markdown.
+
+## Simple Interactive Demo
+
+Here's a basic example of an interactive counter component:
+
+```jsx
+import { useState } from 'react'
+
+export function Counter() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div className="p-4 border rounded-md shadow-sm">
+      <p className="text-xl font-bold">Count: {count}</p>
+      <div className="flex gap-2 mt-2">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => setCount(count + 1)}
+        >
+          Increment
+        </button>
+        <button
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={() => setCount(0)}
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+## Creating an Interactive Code Playground
+
+You can even create components that allow readers to experiment with code directly in your blog:
+
+```jsx
+export function CodePlayground({ initialCode, language }) {
+  const [code, setCode] = useState(initialCode)
+  const [output, setOutput] = useState('')
+
+  const runCode = () => {
+    try {
+      // Note: In a real implementation, you'd need to use a secure
+      // way to evaluate code or a sandbox environment
+      const result = eval(code)
+      setOutput(String(result))
+    } catch (error) {
+      setOutput(`Error: ${error.message}`)
+    }
+  }
+
+  return (
+    <div className="border rounded-md overflow-hidden my-4">
+      <div className="bg-gray-100 dark:bg-gray-800 p-2">
+        <textarea
+          className="w-full p-2 font-mono text-sm bg-white dark:bg-gray-900 rounded"
+          rows={5}
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <button
+          className="mt-2 px-4 py-2 bg-green-500 text-white rounded"
+          onClick={runCode}
+        >
+          Run Code
+        </button>
+      </div>
+      <div className="p-4 bg-black text-white font-mono">
+        <div>Output:</div>
+        <pre>{output}</pre>
+      </div>
+    </div>
+  )
+}
+```
+
+## Data Visualization Components
+
+MDX is perfect for technical blogs that need to visualize data:
+
+```jsx
+import { Bar } from 'react-chartjs-2'
+
+export function TechUsageChart() {
+  const data = {
+    labels: ['React', 'Vue', 'Angular', 'Svelte', 'Remix'],
+    datasets: [
+      {
+        label: 'Developer Usage 2023',
+        data: [70, 45, 40, 30, 25],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+        ],
+      },
+    ],
+  }
+
+  return (
+    <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow my-6">
+      <h3 className="text-lg font-bold mb-4">Framework Popularity</h3>
+      <Bar data={data} />
+    </div>
+  )
+}
+```
+
+## Interactive Image Galleries
+
+Blog posts about visual topics can benefit from interactive image viewers:
+
+```jsx
+export function ImageGallery({ images }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  return (
+    <div className="my-6">
+      <div className="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+        <img
+          src={images[activeIndex].url}
+          alt={images[activeIndex].alt}
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <div className="flex mt-2 gap-2 overflow-x-auto py-2">
+        {images.map((image, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveIndex(idx)}
+            className={`w-16 h-16 rounded overflow-hidden flex-shrink-0 border-2
+              ${idx === activeIndex ? 'border-blue-500' : 'border-transparent'}`}
+          >
+            <img
+              src={image.url}
+              alt=""
+              className="object-cover w-full h-full"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+## Making Your Components Available
+
+Remember to make your components available to MDX by passing them in your MDX provider:
+
+```jsx
+import { MDXProvider } from '@mdx-js/react'
+import {
+  CodePlayground,
+  Counter,
+  ImageGallery,
+  TechUsageChart,
+} from './components'
+
+const components = {
+  Counter,
+  CodePlayground,
+  TechUsageChart,
+  ImageGallery,
+}
+
+export default function BlogPost({ children }) {
+  return (
+    <MDXProvider components={components}>
+      <article>{children}</article>
+    </MDXProvider>
+  )
+}
+```
+
+By integrating interactive components into your MDX blog posts, you can create a much more engaging and educational experience for your readers!

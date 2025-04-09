@@ -1,0 +1,76 @@
+---
+title: Remix and MDX - The Perfect Combination for Modern Blogs
+date: 2023-09-15T10:30:00.000Z
+description: Discover how Remix and MDX work together to create a powerful, flexible blogging platform with code syntax highlighting, interactive components, and more.
+published: true
+tag: remix
+---
+
+# Remix + MDX = Modern Blogging Superpowers
+
+Remix has revolutionized the way we build web applications with its focus on web fundamentals and progressive enhancement. When combined with MDX (Markdown with JSX), it creates an incredibly powerful platform for content creation.
+
+## Why This Combination Works So Well
+
+MDX allows you to seamlessly blend Markdown with React components:
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  )
+}
+
+;<Counter />
+```
+
+## Code Highlighting Demo
+
+Syntax highlighting makes sharing code snippets a breeze:
+
+```typescript
+// TypeScript example
+interface User {
+  id: string
+  name: string
+  email: string
+}
+
+function fetchUser(id: string): Promise<User> {
+  return fetch(`/api/users/${id}`).then((response) => {
+    if (!response.ok) throw new Error('User not found')
+    return response.json()
+  })
+}
+```
+
+## Leveraging Remix Data Loading
+
+One of Remix's superpowers is its data loading capabilities, which work perfectly with MDX content:
+
+```jsx
+export const loader = async ({ params }) => {
+  const post = await getPost(params.slug)
+  return { post }
+}
+```
+
+This loader function allows us to fetch our MDX content and render it with all the interactive components intact.
+
+## Markdown Features Still Work
+
+Of course, all the standard Markdown features still work:
+
+- **Bold text** and _italic text_
+- > Blockquotes for important callouts
+- Lists and nested lists
+  - Like this subitem
+  - And this one
+
+## Conclusion
+
+Remix + MDX gives you the best of both worlds: the simplicity of Markdown for content creation with the power of React components for interactivity. This combination is perfect for creating modern, interactive blog posts that engage your readers.

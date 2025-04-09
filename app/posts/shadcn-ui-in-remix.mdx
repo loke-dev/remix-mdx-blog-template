@@ -1,0 +1,431 @@
+---
+title: Integrating shadcn/ui with Remix - A Complete Guide
+date: 2024-03-10T15:45:00.000Z
+description: Learn how to set up and use shadcn/ui components in your Remix application, including theming, customization, and best practices for maintainability.
+published: true
+tag: ui
+---
+
+# Building Beautiful Remix Apps with shadcn/ui
+
+If you're building a modern web application with Remix and want a high-quality, customizable UI component library, shadcn/ui is an excellent choice. In this guide, we'll walk through integrating shadcn/ui into a Remix project and showcase its capabilities.
+
+## What is shadcn/ui?
+
+shadcn/ui isn't a traditional component library that you install as a package. Instead, it's a collection of reusable components built on Radix UI primitives that you add to your project as needed. This approach gives you complete control over the code and allows for deep customization.
+
+## Setting Up shadcn/ui in Remix
+
+Let's start by adding shadcn/ui to a Remix project:
+
+```bash
+# Navigate to your Remix project
+cd my-remix-app
+
+# Install dependencies
+pnpm add -D @shadcn/ui tailwindcss tailwindcss-animate class-variance-authority clsx @radix-ui/react-slot @radix-ui/react-dialog
+```
+
+Next, initialize shadcn/ui and configure it for your project:
+
+```bash
+# Initialize shadcn/ui
+pnpm dlx shadcn-ui@latest init
+```
+
+When prompted, select the following configurations:
+
+```
+Would you like to use TypeScript? Yes
+Which style would you like to use? Default
+Which color would you like to use as base color? Slate
+Where is your tailwind.config.js located? ./tailwind.config.ts
+Configure the import alias for components: @/components
+Configure the import alias for utils: @/lib/utils
+```
+
+This will create the necessary configuration files and set up the project structure.
+
+## Adding Components
+
+Now you can add components as needed:
+
+```bash
+# Add button component
+pnpm dlx shadcn-ui@latest add button
+
+# Add dialog component
+pnpm dlx shadcn-ui@latest add dialog
+```
+
+## Creating a Theme Switcher
+
+One of the powerful features of shadcn/ui is its theming capability. Let's create a theme switcher component:
+
+```tsx
+// app/components/theme-switcher.tsx
+import { Moon, Sun } from 'lucide-react'
+import { Theme, useTheme } from '@/hooks/use-theme'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+
+export function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme(Theme.LIGHT)}>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme(Theme.DARK)}>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme(Theme.SYSTEM)}>
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+```
+
+## Creating a Form with shadcn/ui Components
+
+Let's build a contact form using shadcn/ui components:
+
+```tsx
+// app/routes/contact.tsx
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { toast } from '@/components/ui/use-toast'
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      // Simulating form submission
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      toast({
+        title: 'Message Sent',
+        description: "We'll get back to you as soon as possible!",
+      })
+
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      toast({
+        title: 'Submission Failed',
+        description: 'Please try again later.',
+        variant: 'destructive',
+      })
+    }
+  }
+
+  return (
+    <div className="container mx-auto py-10">
+      <Card className="max-w-md mx-auto">
+        <CardHeader>
+          <CardTitle>Contact Us</CardTitle>
+          <CardDescription>
+            Fill out the form below to get in touch with our team.
+          </CardDescription>
+        </CardHeader>
+        <form onSubmit={handleSubmit}>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                required
+              />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button type="submit" className="w-full">
+              Send Message
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+    </div>
+  )
+}
+```
+
+## Creating a Data Table
+
+Let's implement a data table to display information:
+
+```tsx
+// app/routes/users.tsx
+import { json } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+
+// Sample user data
+const users = [
+  {
+    id: '1',
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Admin',
+    status: 'Active',
+  },
+  {
+    id: '2',
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    role: 'Editor',
+    status: 'Active',
+  },
+  {
+    id: '3',
+    name: 'Bob Johnson',
+    email: 'bob@example.com',
+    role: 'Viewer',
+    status: 'Inactive',
+  },
+  {
+    id: '4',
+    name: 'Alice Brown',
+    email: 'alice@example.com',
+    role: 'Editor',
+    status: 'Active',
+  },
+  {
+    id: '5',
+    name: 'Charlie Davis',
+    email: 'charlie@example.com',
+    role: 'Viewer',
+    status: 'Pending',
+  },
+]
+
+export const loader = async () => {
+  return json({ users })
+}
+
+export default function UsersPage() {
+  const { users } = useLoaderData<typeof loader>()
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Active':
+        return 'success'
+      case 'Inactive':
+        return 'secondary'
+      case 'Pending':
+        return 'warning'
+      default:
+        return 'default'
+    }
+  }
+
+  return (
+    <div className="container mx-auto py-10">
+      <Card>
+        <CardHeader>
+          <CardTitle>User Management</CardTitle>
+          <CardDescription>
+            Manage user accounts and permissions from this dashboard.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    <Badge variant={getStatusColor(user.status)}>
+                      {user.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Button size="sm" variant="outline">
+                      Edit
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+```
+
+## Customizing Components
+
+One of the great advantages of shadcn/ui is that you can easily customize components. Let's modify the Button component to match your brand colors:
+
+```tsx
+// app/components/ui/button.tsx
+// This assumes you already installed the button component
+
+// Modify the variants object to include your custom styles
+export const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+        // Add your custom variant
+        brand: 'bg-[#8a2be2] text-white hover:bg-[#9b4ddb]',
+      },
+      // ...rest of the code
+    },
+  }
+)
+```
+
+## Best Practices for Using shadcn/ui in Remix
+
+1. **Component Organization**: Keep your shadcn/ui components in a dedicated directory structure, usually under `app/components/ui/`.
+
+2. **Theme Switching**: Implement theme support using Remix's capabilities:
+
+```tsx
+// app/root.tsx
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body className="min-h-screen bg-background text-foreground">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+3. **Form Handling**: When using shadcn/ui with Remix forms, you can leverage both libraries' strengths:
+
+```tsx
+// Using shadcn/ui components with Remix Form
+import { Form } from '@remix-run/react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
+export default function MyForm() {
+  return (
+    <Form method="post" className="space-y-4">
+      <div>
+        <Input name="email" type="email" placeholder="Email" />
+      </div>
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
+}
+```
+
+## Conclusion
+
+shadcn/ui offers a flexible and powerful way to build beautiful user interfaces in your Remix applications. By combining Remix's data handling capabilities with shadcn/ui's elegant components, you can create a seamless and visually appealing user experience.
+
+The copy-and-paste approach of shadcn/ui ensures you have full control over the components, allowing for easy customization and maintenance as your project grows. This makes it an excellent choice for Remix developers looking for a modern, accessible, and highly customizable UI solution.
