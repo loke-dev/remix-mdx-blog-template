@@ -1,0 +1,13 @@
+.cache
+.env
+.env.*
+.git
+.next
+.vercel
+*.min.js
+build
+coverage
+dist
+node_modules
+pnpm-lock.yaml
+public
