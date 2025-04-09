@@ -4,9 +4,9 @@ export function Footer() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <div className="flex items-center">
           <p className="text-sm text-muted-foreground">
-            Built by Loke. The source code is available on{' '}
+            Built with Remix MDX Blog Template. The source code is available on{' '}
             <a
-              href="https://github.com/loke-dev/loke.dev"
+              href="https://github.com/username/remix-mdx-blog-template"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4 hover:text-primary"
@@ -18,20 +18,20 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-8">
           <a
-            href="https://github.com/loke-dev"
+            href="https://github.com/remix-run/remix"
             target="_blank"
             rel="noreferrer"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
-            GitHub
+            Remix
           </a>
           <a
-            href="https://twitter.com/loke_dev"
+            href="https://mdxjs.com/"
             target="_blank"
             rel="noreferrer"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
-            Twitter
+            MDX
           </a>
         </div>
       </div>

@@ -7,7 +7,7 @@ export type Theme = z.infer<typeof ThemeSchema>
 
 const themeStorage = createCookieSessionStorage({
   cookie: {
-    name: 'loke-dev-theme',
+    name: 'remix-mdx-blog-theme',
     sameSite: 'lax',
     path: '/',
     httpOnly: true,

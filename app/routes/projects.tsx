@@ -5,7 +5,7 @@ import { Project } from '@/types/projects'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Projects - loke.dev' },
+    { title: 'Projects - Remix MDX Blog Template' },
     { name: 'description', content: 'My portfolio of projects and work' },
   ]
 }
@@ -19,7 +19,7 @@ const projects: Project[] = [
     technologies: ['Remix', 'React', 'TypeScript', 'Tailwind CSS', 'Vite'],
     imageUrl:
       'https://placehold.co/500x500/4F46E5/FFFFFF?text=Portfolio+Website',
-    url: 'https://loke.dev',
+    url: 'https://remix-mdx-blog-template.vercel.app',
     github: 'https://github.com/username/portfolio',
     featured: true,
     year: 2024,

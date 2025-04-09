@@ -3,7 +3,7 @@ import { createCookieSessionStorage, redirect } from '@remix-run/node'
 // Session storage for flash messages
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: 'loke_flash',
+    name: 'remix_mdx_flash',
     httpOnly: true,
     path: '/',
     sameSite: 'lax',

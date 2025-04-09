@@ -3,7 +3,7 @@ import { Page, PageHeader, Section } from '@/components/layout'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'About - loke.dev' },
+    { title: 'About - Remix MDX Blog Template' },
     { name: 'description', content: 'About me and my journey' },
   ]
 }
@@ -16,7 +16,7 @@ export default function About() {
       <div className="prose prose-gray dark:prose-invert">
         <div className="flex justify-center mb-6">
           <img
-            src="/loke_clay.png"
+            src="https://i.pravatar.cc/300"
             alt="3D clay avatar"
             className="rounded-lg w-64 h-auto"
           />

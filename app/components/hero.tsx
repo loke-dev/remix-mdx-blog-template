@@ -6,11 +6,11 @@ export function Hero() {
       <div className="mx-auto max-w-3xl py-32 sm:py-48 lg:py-32">
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight  sm:text-6xl">
-            Welcome to Loke.dev
+            Welcome to Remix MDX Blog
           </h1>
           <p className="mt-6 text-lg leading-8 ">
-            Frontend developer & open source enthusiast. Building web
-            experiences with modern technologies.
+            A modern blog template built with Remix, MDX, and Tailwind CSS.
+            Perfect for developers and content creators.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link

@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Contact - loke.dev' },
+    { title: 'Contact - Remix MDX Blog Template' },
     { name: 'description', content: 'Get in touch with me' },
   ]
 }

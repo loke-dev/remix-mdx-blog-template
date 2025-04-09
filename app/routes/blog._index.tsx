@@ -8,7 +8,7 @@ import { Grid, Page, PageHeader } from '@/components/layout'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Blog - loke.dev' },
+    { title: 'Blog - Remix MDX Blog Template' },
     {
       name: 'description',
       content:
