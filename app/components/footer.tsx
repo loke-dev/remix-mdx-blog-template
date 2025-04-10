@@ -6,7 +6,7 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             Built with Remix MDX Blog Template. The source code is available on{' '}
             <a
-              href="https://github.com/username/remix-mdx-blog-template"
+              href="https://github.com/loke-dev/remix-mdx-blog-template"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4 hover:text-primary"
