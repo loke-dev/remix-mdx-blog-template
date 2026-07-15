@@ -73,7 +73,7 @@ This is my first blog post.
 
 ## Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/loke-dev/remix-mdx-blog-template)
+[Live demo](https://remix-mdx-blog.loke.dev)
 
 ## License
 

@@ -19,7 +19,7 @@ const projects: Project[] = [
     technologies: ['Remix', 'React', 'TypeScript', 'Tailwind CSS', 'Vite'],
     imageUrl:
       'https://placehold.co/500x500/4F46E5/FFFFFF?text=Portfolio+Website',
-    url: 'https://remix-mdx-blog-template.vercel.app',
+    url: 'https://remix-mdx-blog.loke.dev',
     github: 'https://github.com/username/portfolio',
     featured: true,
     year: 2024,
