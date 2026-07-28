@@ -37,8 +37,17 @@ test('blog posts render MDX content and syntax highlighting', async ({
   await page.goto('/blog')
   await page.locator('a[href="/blog/remix-and-mdx-perfect-combo"]').click()
   await expect(page).toHaveURL('/blog/remix-and-mdx-perfect-combo')
+  await expect(
+    page.getByRole('heading', {
+      level: 1,
+      name: 'Remix and MDX - The Perfect Combination for Modern Blogs',
+    })
+  ).toBeVisible()
 
   await expect(page.getByRole('article')).toBeVisible()
+  await expect(page).toHaveTitle(
+    'Blog - Remix and MDX - The Perfect Combination for Modern Blogs'
+  )
   await expect(page.locator('pre code').first()).toBeVisible()
 })
 

@@ -7,7 +7,7 @@ import { Callout } from '@/components/callout'
 import { Page } from '@/components/layout'
 
 export const meta: MetaFunction = ({ params }) => {
-  const post = allPosts.find((post) => post.title === params.slug)
+  const post = allPosts.find((post) => post._meta.path === params.slug)
 
   return [
     { title: `Blog - ${post?.title}` },
