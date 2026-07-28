@@ -5,10 +5,11 @@
   "type": "module",
   "packageManager": "pnpm@11.17.0",
   "scripts": {
-    "build": "react-router build",
+    "build": "pnpm content:build && react-router build",
+    "content:build": "node scripts/build-content.mjs",
     "dev": "react-router dev --port 3000",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "typecheck": "react-router typegen && tsc",
+    "typecheck": "pnpm content:build && react-router typegen && tsc",
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,mdx,json}\"",
     "test:e2e": "playwright test",
