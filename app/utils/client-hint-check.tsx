@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { subscribeToSchemeChange } from '@epic-web/client-hints/color-scheme'
-import { useRevalidator } from '@remix-run/react'
+import { useRevalidator } from 'react-router'
 import { hintsUtils } from './hints'
 
 export function ClientHintCheck() {

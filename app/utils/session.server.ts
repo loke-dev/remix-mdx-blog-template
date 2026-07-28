@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, redirect } from '@remix-run/node'
+import { createCookieSessionStorage, redirect } from 'react-router'
 
 // Session storage for flash messages
 const sessionStorage = createCookieSessionStorage({

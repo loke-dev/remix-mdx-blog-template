@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Link } from 'react-router'
 import { Project } from '@/types/projects'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'

@@ -1,4 +1,3 @@
-import { type LinksFunction, type LoaderFunctionArgs } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   Links,
@@ -8,7 +7,9 @@ import {
   ScrollRestoration,
   useRouteError,
   useRouteLoaderData,
-} from '@remix-run/react'
+  type LinksFunction,
+  type LoaderFunctionArgs,
+} from 'react-router'
 import { ClientHintCheck } from '@/utils/client-hint-check'
 import { getHints } from '@/utils/hints'
 import { getEffectiveTheme, getTheme } from '@/utils/theme.server'

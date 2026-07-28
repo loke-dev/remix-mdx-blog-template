@@ -1,5 +1,3 @@
-import type { MetaFunction } from '@remix-run/node'
-import { Link } from '@remix-run/react'
 import {
   AlertTriangle,
   ArrowRight,
@@ -21,6 +19,7 @@ import {
   Type,
   Zap,
 } from 'lucide-react'
+import { Link, type MetaFunction } from 'react-router'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -33,11 +32,11 @@ import {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Remix MDX Blog Template - Modern Web Development' },
+    { title: 'React Router MDX Blog Template - Modern Web Development' },
     {
       name: 'description',
       content:
-        'A modern blog template built with Remix, MDX, and Tailwind CSS. Perfect for developers and content creators.',
+        'A modern blog template built with React Router, MDX, and Tailwind CSS. Perfect for developers and content creators.',
     },
   ]
 }
@@ -61,12 +60,12 @@ export default function Index() {
               </Badge>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
-              Remix MDX Blog Template
+              React Router MDX Blog Template
             </h1>
             <p className="mt-6 text-xl leading-8 text-muted-foreground max-w-2xl mx-auto">
-              A powerful, modern blog template built with Remix, Vite, and
-              Tailwind. Perfect for developers and content creators who want to
-              share their ideas beautifully.
+              A powerful, modern blog template built with React Router, Vite,
+              and Tailwind. Perfect for developers and content creators who want
+              to share their ideas beautifully.
             </p>
             <div className="mt-10 flex items-center justify-center gap-6 flex-wrap">
               <Button asChild size="lg">
@@ -98,7 +97,8 @@ export default function Index() {
                 <Zap className="text-primary mb-2" />
                 <CardTitle>Lightning Fast</CardTitle>
                 <CardDescription>
-                  Built with Remix v2 and Vite for incredible performance and DX
+                  Built with React Router v8 and Vite for excellent performance
+                  and DX
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -200,7 +200,7 @@ export default function Index() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             <TechItem
               icon={<Sparkles size={16} />}
-              name="Remix"
+              name="React Router"
               description="React-based web framework"
             />
             <TechItem

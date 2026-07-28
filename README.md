@@ -1,12 +1,12 @@
-# Remix MDX Blog Template
+# React Router MDX Blog Template
 
-A blog template built with Remix, Vite, and Tailwind CSS. Write posts in MDX with full React component support.
+A blog template built with React Router, Vite, and Tailwind CSS. Write posts in MDX with full React component support.
 
-<img src="https://github.com/user-attachments/assets/ba7c5cd1-1611-439c-811a-e1d33f9d046c" alt="Remix MDX Blog Template" width="600" />
+<img src="https://github.com/user-attachments/assets/ba7c5cd1-1611-439c-811a-e1d33f9d046c" alt="React Router MDX Blog Template" width="600" />
 
 ## Features
 
-- **Fast** — Remix v2 + Vite, server-rendered by default
+- **Fast** — React Router v8 + Vite, server-rendered by default
 - **MDX Powered** — Markdown with React components in your posts
 - **Type-Safe Content** — Content Collections with Zod validation and generated types
 - **Dark Mode** — Light and dark themes with system preference detection
@@ -15,7 +15,7 @@ A blog template built with Remix, Vite, and Tailwind CSS. Write posts in MDX wit
 
 ## Stack
 
-- [Remix](https://remix.run)
+- [React Router](https://reactrouter.com)
 - [Vite](https://vitejs.dev)
 - [Tailwind CSS](https://tailwindcss.com)
 - [shadcn/ui](https://ui.shadcn.com)
@@ -34,7 +34,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Requires Node.js 22.12+ and pnpm 11.17.0.
+Requires Node.js 22.22+ and pnpm 11.17.0.
 
 ## Project Structure
 
@@ -46,6 +46,8 @@ app/
 ├── styles/        # Global styles
 ├── utils/         # Utility functions
 └── types/         # TypeScript types
+workers/
+└── app.ts         # Cloudflare Workers entry point
 ```
 
 ## Writing Posts
@@ -84,9 +86,11 @@ pnpm deploy:dry
 pnpm deploy
 ```
 
-React 18, Vite 6, TypeScript 5, and ESLint 9 are intentional compatibility
-holds for Remix 2.17. Moving to their next major versions requires migrating
-the application to React Router framework mode.
+The template uses React Router framework mode and Cloudflare's Vite plugin.
+`pnpm deploy:dry` validates the generated Worker bundle without publishing it.
+TypeScript 5 and ESLint 9 remain on their newest compatible releases until the
+current TypeScript ESLint, import, React, and accessibility plugins publish
+support for TypeScript 7 and ESLint 10.
 
 ## License
 

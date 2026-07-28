@@ -4,7 +4,8 @@ export function Footer() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <div className="flex items-center">
           <p className="text-sm text-muted-foreground">
-            Built with Remix MDX Blog Template. The source code is available on{' '}
+            Built with React Router MDX Blog Template. The source is available
+            on{' '}
             <a
               href="https://github.com/loke-dev/remix-mdx-blog-template"
               target="_blank"
@@ -18,12 +19,12 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-8">
           <a
-            href="https://github.com/remix-run/remix"
+            href="https://github.com/remix-run/react-router"
             target="_blank"
             rel="noreferrer"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
-            Remix
+            React Router
           </a>
           <a
             href="https://mdxjs.com/"

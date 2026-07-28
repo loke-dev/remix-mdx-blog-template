@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from 'react-router'
 import { Page, PageHeader, Section } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Contact - Remix MDX Blog Template' },
+    { title: 'Contact - React Router MDX Blog Template' },
     { name: 'description', content: 'Get in touch with me' },
   ]
 }

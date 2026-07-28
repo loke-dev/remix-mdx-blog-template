@@ -3,6 +3,11 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+overrides:
+  brace-expansion: 5.0.8
+  uuid: 11.1.1
+patchedDependencies:
+  brace-expansion@5.0.8: patches/brace-expansion@5.0.8.patch
 peerDependencyRules:
   allowedVersions:
     "@cloudflare/workers-types": ">=5 <6"

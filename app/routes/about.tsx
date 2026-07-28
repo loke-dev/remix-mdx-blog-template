@@ -1,9 +1,9 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from 'react-router'
 import { Page, PageHeader, Section } from '@/components/layout'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'About - Remix MDX Blog Template' },
+    { title: 'About - React Router MDX Blog Template' },
     { name: 'description', content: 'About me and my journey' },
   ]
 }
@@ -38,7 +38,7 @@ export default function About() {
 
         <Section title="Skills & Expertise">
           <ul className="mt-4 space-y-2">
-            <li>Frontend: React, Remix, Next.js, TypeScript</li>
+            <li>Frontend: React, React Router, Next.js, TypeScript</li>
             <li>Styling: Tailwind CSS, CSS-in-JS</li>
             <li>Backend: Node.js, Express, SQL/NoSQL databases</li>
             <li>DevOps: CI/CD, Docker, Cloud services</li>

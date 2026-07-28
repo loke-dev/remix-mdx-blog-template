@@ -1,17 +1,18 @@
 import path from 'path'
+import { cloudflare } from '@cloudflare/vite-plugin'
 import contentCollections from '@content-collections/remix-vite'
 import mdx from '@mdx-js/rollup'
-import { vitePlugin as remix } from '@remix-run/dev'
+import { reactRouter } from '@react-router/dev/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   plugins: [
+    cloudflare({ viteEnvironment: { name: 'ssr' } }),
     mdx({
       remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
       rehypePlugins: [
@@ -26,19 +27,12 @@ export default defineConfig({
         ],
       ],
     }),
-    remix({
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
-        v3_lazyRouteDiscovery: true,
-      },
-    }),
+    reactRouter(),
     tailwindcss(),
-    tsconfigPaths(),
     contentCollections(),
   ],
   resolve: {
+    tsconfigPaths: true,
     alias: {
       '@': path.resolve(__dirname, './app'),
     },

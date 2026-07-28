@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/// <reference types="@remix-run/node" />
+/// <reference types="@cloudflare/workers-types" />
 /// <reference types="vite/client" />
 
 declare module '*.mdx' {

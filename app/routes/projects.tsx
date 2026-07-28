@@ -1,11 +1,11 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from 'react-router'
 import { Grid, Page, PageHeader, Section } from '@/components/layout'
 import { ProjectCard } from '@/components/projectCard'
 import { Project } from '@/types/projects'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Projects - Remix MDX Blog Template' },
+    { title: 'Projects - React Router MDX Blog Template' },
     { name: 'description', content: 'My portfolio of projects and work' },
   ]
 }
@@ -15,8 +15,14 @@ const projects: Project[] = [
     id: 'portfolio',
     title: 'Personal Portfolio 123',
     description:
-      'A personal portfolio website built with Remix, showcasing my projects and skills.',
-    technologies: ['Remix', 'React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+      'A personal portfolio website built with React Router, showcasing my projects and skills.',
+    technologies: [
+      'React Router',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Vite',
+    ],
     imageUrl:
       'https://placehold.co/500x500/4F46E5/FFFFFF?text=Portfolio+Website',
     url: 'https://remix-mdx-blog.loke.dev',

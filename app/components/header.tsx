@@ -1,5 +1,5 @@
-import { Link } from '@remix-run/react'
 import { Menu } from 'lucide-react'
+import { Link } from 'react-router'
 import { ThemeToggle } from '@/components/themeToggle'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,7 +25,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <Link to="/" className="flex items-center">
           <span className="text-xl font-bold tracking-tight">
-            remix-mdx-blog
+            react-router-mdx-blog
           </span>
         </Link>
 
@@ -63,7 +63,7 @@ export function Header() {
                 <SheetClose asChild>
                   <Link to="/" className="flex items-center">
                     <span className="text-xl font-bold tracking-tight">
-                      remix-mdx-blog
+                      react-router-mdx-blog
                     </span>
                   </Link>
                 </SheetClose>

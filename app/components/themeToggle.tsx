@@ -1,11 +1,6 @@
 import { parseWithZod } from '@conform-to/zod/v4'
-import {
-  useFetcher,
-  useFetchers,
-  useLocation,
-  useMatches,
-} from '@remix-run/react'
 import { Monitor, Moon, Sun } from 'lucide-react'
+import { useFetcher, useFetchers, useLocation, useMatches } from 'react-router'
 import { z } from 'zod'
 import { type Theme } from '@/utils/theme.server'
 import { Button } from '@/components/ui/button'
@@ -41,7 +36,7 @@ function useOptimisticThemeMode() {
 export function ThemeToggle() {
   const matches = useMatches()
   const rootMatch = matches.find((match) => match.id === 'root')
-  const data = rootMatch?.data as RootLoaderData | undefined
+  const data = rootMatch?.loaderData as RootLoaderData | undefined
   const theme = data?.theme || 'system'
   const systemTheme = data?.systemTheme || 'light'
 

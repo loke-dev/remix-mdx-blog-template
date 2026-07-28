@@ -9,7 +9,7 @@ test('core pages render without console errors or horizontal overflow', async ({
   })
 
   const pages = [
-    ['/', 'Remix MDX Blog Template'],
+    ['/', 'React Router MDX Blog Template'],
     ['/blog', 'Blog'],
     ['/about', 'About Me'],
     ['/projects', 'Projects'],
@@ -60,7 +60,7 @@ test('mobile navigation remains usable without horizontal overflow', async ({
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Remix MDX Blog Template',
+      name: 'React Router MDX Blog Template',
     })
   ).toBeVisible()
   expect(

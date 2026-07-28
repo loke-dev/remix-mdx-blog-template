@@ -1,7 +1,10 @@
 import { MDXContent } from '@content-collections/mdx/react'
-import { LoaderFunctionArgs } from '@remix-run/node'
-import { MetaFunction, useLoaderData } from '@remix-run/react'
 import { allPosts } from 'content-collections'
+import {
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router'
 import { setFlashMessage } from '@/utils/session.server'
 import { Callout } from '@/components/callout'
 import { Page } from '@/components/layout'
