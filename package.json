@@ -13,7 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,mdx,json}\"",
     "test:e2e": "playwright test",
-    "ci-check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm build",
+    "ci-check": "pnpm lint && pnpm format:check && pnpm build && pnpm typecheck",
     "deploy": "pnpm build && wrangler deploy",
     "deploy:dry": "pnpm build && wrangler deploy --dry-run",
     "prepare": "husky",
