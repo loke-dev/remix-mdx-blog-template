@@ -1,0 +1,9 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+peerDependencyRules:
+  allowedVersions:
+    "@cloudflare/workers-types": ">=5 <6"
+    wrangler: ">=4 <5"

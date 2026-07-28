@@ -15,7 +15,8 @@ const pageHeaderVariants = cva('mb-8', {
 })
 
 export interface PageHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof pageHeaderVariants> {
   title: string
   description?: string

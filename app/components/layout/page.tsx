@@ -23,7 +23,8 @@ const pageVariants = cva('min-h-[calc(100vh-4rem)]', {
 })
 
 export interface PageProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof pageVariants> {}
 
 const Page = React.forwardRef<HTMLDivElement, PageProps>(

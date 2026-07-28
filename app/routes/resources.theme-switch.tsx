@@ -1,4 +1,4 @@
-import { data, redirect, type ActionFunctionArgs } from '@remix-run/node'
+import { json, redirect, type ActionFunctionArgs } from '@remix-run/node'
 import { z } from 'zod'
 import { setTheme, ThemeSchema } from '@/utils/theme.server'
 
@@ -18,7 +18,7 @@ export async function action({ request }: ActionFunctionArgs) {
   })
 
   if (!result.success) {
-    return data(
+    return json(
       { success: false, error: 'Invalid theme value' },
       { status: 400 }
     )
@@ -35,5 +35,5 @@ export async function action({ request }: ActionFunctionArgs) {
     return redirect(parsedRedirectTo, responseInit)
   }
 
-  return data({ success: true }, responseInit)
+  return json({ success: true }, responseInit)
 }

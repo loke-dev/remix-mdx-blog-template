@@ -1,6 +1,6 @@
 import type { AppLoadContext, EntryContext } from '@remix-run/cloudflare'
 import { RemixServer } from '@remix-run/react'
-import { renderToReadableStream } from 'react-dom/server.browser'
+import { renderToReadableStream } from 'react-dom/server'
 
 export default async function handleRequest(
   request: Request,
@@ -13,7 +13,7 @@ export default async function handleRequest(
 ) {
   const body = await renderToReadableStream(
     <RemixServer context={remixContext} url={request.url} />,
-    { signal: request.signal }
+    {}
   )
 
   responseHeaders.set('Content-Type', 'text/html')

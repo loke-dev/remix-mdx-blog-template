@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { data, LoaderFunctionArgs } from '@remix-run/node'
+import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { Link, MetaFunction, useLoaderData } from '@remix-run/react'
 import { allPosts } from 'content-collections'
 import { toast } from 'sonner'
@@ -20,7 +20,7 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { toast, headers } = await getFlashMessage(request)
 
-  return data({ posts: allPosts, toast }, { headers })
+  return json({ posts: allPosts, toast }, { headers })
 }
 
 export default function BlogIndex() {

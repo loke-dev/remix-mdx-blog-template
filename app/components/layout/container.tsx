@@ -22,7 +22,8 @@ const containerVariants = cva('container mx-auto', {
 })
 
 export interface ContainerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof containerVariants> {}
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(

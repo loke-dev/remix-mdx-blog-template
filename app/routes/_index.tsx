@@ -13,7 +13,6 @@ import {
   FileText,
   Flower,
   GitBranch,
-  Github,
   Moon,
   Palette,
   Rocket,
@@ -77,7 +76,7 @@ export default function Index() {
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="https://github.com/loke-dev/remix-mdx-blog-template">
-                  <Github className="mr-2" /> GitHub
+                  <GitBranch className="mr-2" /> GitHub
                 </Link>
               </Button>
             </div>

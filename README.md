@@ -34,6 +34,8 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+Requires Node.js 22.12+ and pnpm 11.17.0.
+
 ## Project Structure
 
 ```
@@ -74,6 +76,17 @@ This is my first blog post.
 ## Deploy
 
 [Live demo](https://remix-mdx-blog.loke.dev)
+
+```bash
+pnpm ci-check
+pnpm test:e2e
+pnpm deploy:dry
+pnpm deploy
+```
+
+React 18, Vite 6, TypeScript 5, and ESLint 9 are intentional compatibility
+holds for Remix 2.17. Moving to their next major versions requires migrating
+the application to React Router framework mode.
 
 ## License
 

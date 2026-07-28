@@ -27,8 +27,5 @@
     "^[./]"
   ],
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
-  "importOrderTypeScriptVersion": "5.0.0",
-  "importOrderSortSpecifiers": true,
-  "importOrderMergeDuplicateImports": true,
-  "importOrderCaseInsensitive": true
+  "importOrderTypeScriptVersion": "5.0.0"
 }

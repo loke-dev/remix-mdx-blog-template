@@ -8,7 +8,8 @@ const sectionVariants = cva('mb-12', {
 })
 
 export interface SectionProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends
+    React.HTMLAttributes<HTMLElement>,
     VariantProps<typeof sectionVariants> {
   title?: string
   description?: string

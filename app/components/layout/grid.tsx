@@ -47,7 +47,8 @@ const gridVariants = cva('grid', {
 })
 
 export interface GridProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof gridVariants> {}
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(

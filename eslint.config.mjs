@@ -17,6 +17,9 @@ export default [
       ".env",
       "dist/**",
       "coverage/**",
+      ".content-collections/**",
+      ".wrangler/**",
+      "test-results/**",
       "public/**",
       "!**/.server",
       "!**/.client"
