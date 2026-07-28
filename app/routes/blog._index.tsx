@@ -13,7 +13,7 @@ import { Grid, Page, PageHeader } from '@/components/layout'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Blog - Remix MDX Blog Template' },
+    { title: 'Blog - React Router MDX Blog Template' },
     {
       name: 'description',
       content:
